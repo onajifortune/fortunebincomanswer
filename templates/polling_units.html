@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Polling Units</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Polling Units Table</h2>
+  <b><p>Click on the serial number to view individual Polling Unit</p></b>
+  <a href="{% url 'local_govt' %}"><p>LGA results  </p></a> 
+  <a href="{% url 'add_results' %}"><p> Add Results</p></a>         
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Serial No.</th>
+        <th>Poling Unit Number</th>
+        <th>Polling Unit Name</th>
+        <th>Polling Unit Description</th>
+        <th>Local Government</th>
+        <th>Entered by User</th>
+        <th>Date Entered</th>
+        <th>User IP Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if polling_units %}
+      {% for unit in polling_units %}
+    <tr>
+        <td><a href="{{ unit.get_absolute_url }}">{{unit.uniqueid}}</a></td>
+        <td>{{unit.polling_unit_number}}</td>
+        <td>{{unit.polling_unit_name}}</td>
+        <td>{{unit.polling_unit_description}}</td>
+        <td>{{unit.lga_id}}</td>
+        <td>{{unit.entered_by_user}}</td>
+        <td>{{unit.date_entered}}</td>
+        <td>{{unit.user_ip_address}}</td>
+    </tr>
+      {% endfor %}
+      {% else %}
+        None
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

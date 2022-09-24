@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Add Results</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+    <div><center>
+    <h2>Local Government Polling Results</h2>
+    <b><p>      Select the Polling Units from the dropdown then add results</p></b>
+    {% if message %}
+        <h4>{{message}}</h4>
+    {% endif %}
+    <a style="display: inline-block;" href="{% url 'polling_units' %}"><p>Polling Units</p></a>
+    </center></div>
+
+
+<form class="form-horizontal" action="{% url 'add_results' %}" method="post">
+    {% csrf_token %}
+<div class="form-group"> 
+    <label class="col-md-4 control-label">Polling Unit</label>
+      <div class="col-md-4 selectContainer">
+      <div class="input-group">
+      <select class="form-control" name="choice">
+          <option value="" selected>--Select Polling Unit--</option>
+          {% for i in polling_unit_names %}
+              <option value="{{i.uniqueid}}">{{i.polling_unit_name}} - {{i.polling_unit_number}}</option>
+          {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+{% for p in parties%}
+<div class="form-group">
+  <label class="col-md-4 control-label" >{{ p.partyname }}</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+  <input name="{{p.partyname.lower}}" placeholder="" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"><br>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+  </div>
+</div>
+
+</form>
+</body>
+</html>

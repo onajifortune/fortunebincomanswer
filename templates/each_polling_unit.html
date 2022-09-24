@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Polling Unit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Polling Unit Table</h2>
+  <u><h3>{{poll_unit.polling_unit_name}}</h3></u>
+  <b><p>All the results from {{poll_unit.polling_unit_name}}</p></b>           
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        {% for r in unit %}
+        <th>{{r.party_abbreviation}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% if unit %}
+    <tr>
+      {% for s in unit %}
+        <td>{{s.party_score}}</td>
+      {% endfor %}
+    </tr>
+      {% else %}
+        None
+      {% endif %}
+    </tbody>
+  </table>
+  <a href="{% url 'polling_units' %}"><p>Polling Units</p></a>
+</div>
+
+</body>
+</html>
