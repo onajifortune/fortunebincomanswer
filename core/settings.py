@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASE_URL = os.environ.get('POSTGRES_DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
@@ -118,19 +118,6 @@ USE_I18N = True
 
 USE_TZ = False
 
-#AWS 
-
-# AWS_ACCESS_KEY = ''
-# AWS_STORAGE_BUCKET_NAME = ''
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-# AWS_DEFAULT_ACL = 'public-read'
-# AWS_S3_PARAMETERS = {
-#     'CachControl':'max_age=86400'
-# }
-# AWS_LOCATION = 'static'
-# AWS_HEADERS = {
-#     'Access-Control-Allow-Origin':'*'
-# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -143,12 +130,6 @@ STATICFILES_DIRS = [
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-# DEFAULT_FILE_STORAGE = 'storage.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storage.backends.s3boto3.S3Static3Storage'
-
-# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-
-# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 
 
@@ -160,12 +141,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
-
-# {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'bincomtestdb',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#         'USER': 'root',
-#         'PASSWORD': os.environ.get('DB_PASSWORD')
-#     }
