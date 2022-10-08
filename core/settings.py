@@ -79,23 +79,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bincomtestdb',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': os.environ.get('DB_PASSWORD')
-    }
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
 }
 
-# DATABASE_URL = os.environ.get('DATABASE_URL')
 
-# print(DATABASES)
-# db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
-# print(db_from_env)
-# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -168,3 +159,13 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
+
+
+# {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bincomtestdb',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'USER': 'root',
+#         'PASSWORD': os.environ.get('DB_PASSWORD')
+#     }
