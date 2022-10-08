@@ -83,15 +83,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bincomtestdb',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': os.environ.get('DB_PASSWORD')
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# DATABASE_URL = os.environ.get('DATABASE_URL')
+
+# print(DATABASES)
+# db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
+# print(db_from_env)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
